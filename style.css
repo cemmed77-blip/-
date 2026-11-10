@@ -1,0 +1,20 @@
+/* تخصيص التمرير ومنع التحديد غير المرغوب في الهواتف */
+body {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* تخصيص شريط التمرير لقائمة المهام */
+#todo-list::-webkit-scrollbar {
+  width: 4px;
+}
+#todo-list::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+/* انيميشن للمهام المكتملة */
+.task-done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

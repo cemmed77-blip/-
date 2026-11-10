@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow - مساعد الإنتاجية</title>
+  <!-- Tailwind CSS عبر CDN لتنسيق سريع وعصري -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- أيقونات Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-between font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- الهيدر العلوي -->
+  <header class="w-full max-w-md p-4 flex justify-between items-center border-b border-slate-800">
+    <div class="flex items-center space-x-2 space-x-reverse">
+      <i data-lucide="zap" class="w-6 h-6 text-indigo-400"></i>
+      <h1 class="text-xl font-bold tracking-wide text-indigo-400">FocusFlow</h1>
+    </div>
+    <span id="today-date" class="text-xs text-slate-400"></span>
+  </header>
+
+  <!-- محتوى التطبيق الرئيسي -->
+  <main class="w-full max-w-md flex-1 p-4 pb-24 flex flex-col justify-center">
+    
+    <!-- قسم المؤقت (Timer Section) -->
+    <section id="view-timer" class="app-view flex flex-col items-center space-y-6">
+      <!-- أزرار الوضع -->
+      <div class="flex bg-slate-800 p-1 rounded-xl w-full max-w-xs justify-between text-sm font-medium">
+        <button id="mode-work" class="flex-1 py-2 rounded-lg transition-all bg-indigo-600 text-white">تركيز (25د)</button>
+        <button id="mode-short" class="flex-1 py-2 rounded-lg transition-all text-slate-400 hover:text-white">راحة (5د)</button>
+      </div>
+
+      <!-- الدائرة والمؤقت -->
+      <div class="relative w-64 h-64 flex items-center justify-center my-4">
+        <!-- شريط التقدم الدائري -->
+        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="44" class="stroke-slate-800" stroke-width="8" fill="transparent" />
+          <circle id="progress-ring" cx="50" cy="50" r="44" class="stroke-indigo-500 transition-all duration-1000" stroke-width="8" stroke-dasharray="276.46" stroke-dashoffset="0" stroke-linecap="round" fill="transparent" />
+        </svg>
+        <!-- النص والوقت -->
+        <div class="absolute flex flex-col items-center">
+          <span id="timer-display" class="text-5xl font-extrabold tracking-wider font-mono">25:00</span>
+          <span id="timer-label" class="text-xs text-slate-400 mt-2">جلسة التركيز</span>
+        </div>
+      </div>
+
+      <!-- أزرار التحكم -->
+      <div class="flex items-center space-x-4 space-x-reverse">
+        <button id="btn-start" class="bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all flex items-center gap-2">
+          <i data-lucide="play" class="w-5 h-5"></i> ابدأ
+        </button>
+        <button id="btn-reset" class="bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 p-3 rounded-full transition-all">
+          <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- قسم المهام (Tasks Section) -->
+    <section id="view-tasks" class="app-view hidden flex-col space-y-4">
+      <h2 class="text-lg font-bold text-slate-200 mb-2 flex items-center gap-2">
+        <i data-lucide="check-square" class="w-5 h-5 text-indigo-400"></i> مهام اليوم
+      </h2>
+      
+      <!-- إدخال مهمة جديدة -->
+      <form id="todo-form" class="flex gap-2">
+        <input type="text" id="todo-input" placeholder="أضف مهمة جديدة..." required class="flex-1 bg-slate-800 text-slate-100 placeholder-slate-500 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-xl transition-all">
+          <i data-lucide="plus" class="w-5 h-5"></i>
+        </button>
+      </form>
+
+      <!-- قائمة المهام -->
+      <ul id="todo-list" class="space-y-2 mt-4 max-h-80 overflow-y-auto">
+        <!-- سيتم إضافة المهام هنا عبر JS -->
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- شريط التنقل السفلي (Bottom Navigation Bar) -->
+  <nav class="fixed bottom-0 w-full max-w-md bg-slate-950/90 backdrop-blur-md border-t border-slate-800 flex justify-around py-3 px-6 z-50">
+    <button id="nav-timer" class="nav-btn flex flex-col items-center gap-1 text-indigo-400">
+      <i data-lucide="timer" class="w-6 h-6"></i>
+      <span class="text-xs">المؤقت</span>
+    </button>
+    <button id="nav-tasks" class="nav-btn flex flex-col items-center gap-1 text-slate-500 hover:text-slate-300">
+      <i data-lucide="list-todo" class="w-6 h-6"></i>
+      <span class="text-xs">المهام</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
